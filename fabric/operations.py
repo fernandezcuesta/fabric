@@ -29,7 +29,8 @@ from fabric.utils import (
     indent,
     _pty_size,
     warn,
-    apply_lcwd
+    apply_lcwd,
+    puts
 )
 
 
@@ -914,9 +915,9 @@ def _run_command(command, shell=True, pty=True, combine_stderr=True,
         # Execute info line
         which = 'sudo' if sudo else 'run'
         if output.debug:
-            print("[%s] %s: %s" % (env.host_string, which, wrapped_command))
+            puts("%s: %s" % (which, wrapped_command))
         elif output.running:
-            print("[%s] %s: %s" % (env.host_string, which, given_command))
+            puts("%s: %s" % (which, given_command))
 
         # Actual execution, stdin/stdout/stderr handling, and termination
         result_stdout, result_stderr, status = _execute(
